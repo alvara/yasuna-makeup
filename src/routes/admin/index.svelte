@@ -1,4 +1,3 @@
-
 <script>
 	import { browser } from '$app/env';
 </script>

@@ -2,7 +2,9 @@
 	export const prerender = true;
 </script>
 
+
 <script>
+	import { browser } from '$app/env';
 	import Counter from '$lib/Counter.svelte';
 </script>
 
@@ -28,6 +30,20 @@
 
 	<Counter />
 </section>
+
+{#if browser}
+	<script>
+		if (window.netlifyIdentity) {
+			window.netlifyIdentity.on("init", user => {
+				if (!user) {
+					window.netlifyIdentity.on("login", () => {
+						document.location.href = "/admin/";
+					});
+				}
+			});
+		}
+	</script>
+{/if}
 
 <style>
 	section {
